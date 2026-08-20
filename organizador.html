@@ -200,7 +200,11 @@
   .week-allday .daycell { border-right: 1px solid var(--gridline); padding: 3px; display: flex; flex-direction: column; gap: 3px; min-width: 0; }
   .week-allday .daycell:last-child { border-right: none; }
 
-  .week-grid-wrap { position: relative; max-height: 560px; overflow-y: auto; }
+  /* overflow-x explícito en "visible": si se deja sin declarar, la spec de CSS hace que
+     compute a "auto" solo por tener overflow-y:auto, lo que crea un scroll horizontal
+     propio e independiente acá adentro — quedaba desincronizado del scroll horizontal
+     de arriba (los días) cuando la semana se desliza en el celular. */
+  .week-grid-wrap { position: relative; max-height: 560px; overflow-y: auto; overflow-x: visible; }
   .week-grid { display: grid; grid-template-columns: 56px repeat(7, 1fr); position: relative; }
   .hour-col { border-right: 1px solid var(--gridline); }
   .hour-label {
